@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, SafeAreaView, StatusBar } from 'react-native';
+import { View, Text, StyleSheet, FlatList, SafeAreaView, StatusBar, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomeScreen = ({ navigation }) => {
@@ -30,8 +30,6 @@ const HomeScreen = ({ navigation }) => {
   }, [navigation]);
 
   const calcolaMediaMateria = (voti) => {
-    //if (!voti || voti.length === 0) return 'N/A';
-
     let pesoTotale = 0;
     let sommaPesi = 0;
 
@@ -48,11 +46,14 @@ const HomeScreen = ({ navigation }) => {
     const nomeMateria = item[0];
     const voti = item[1] || [];
 
-    const ultimiVoti =voti.slice(-3);
+    const ultimiVoti = voti.slice(-3);
     const media = calcolaMediaMateria(voti);
 
     return (
-      <View style={stili.containerMateria}>
+      <TouchableOpacity 
+        style={stili.containerMateria} 
+        onPress={() => navigation.navigate('DettagliMateria', { nomeMateria, voti })}
+      >
         <View style={{ flex: 3 }}>
           <Text style={stili.nomeMateria}>{nomeMateria}</Text>
           <Text style={stili.rigaVoti}>
@@ -60,7 +61,7 @@ const HomeScreen = ({ navigation }) => {
           </Text>
         </View>
         <Text style={stili.media}>{media}</Text>
-      </View>
+      </TouchableOpacity>
     );
   };
 

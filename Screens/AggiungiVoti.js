@@ -37,8 +37,6 @@ const AggiungiVoti = ({ navigation }) => {
 
       await AsyncStorage.setItem('materie', JSON.stringify(materieAggiornate));
 
-      Alert.alert('Successo', `Voto per ${materia} aggiunto con successo!`);
-      setVoto('');
       navigation.navigate('Home');
     } catch (errore) {
       console.error('Errore nel salvataggio dei voti:', errore);
