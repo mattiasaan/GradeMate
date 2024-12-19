@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './Screens/HomeScreen';
 import AggiungiVotiScreen from './Screens/AggiungiVoti';
 import DettagliMateriaScreen from './Screens/DettagliMateria';
+import WelcomeScreen from './Screens/WelcomePage'
 import { Ionicons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
@@ -23,9 +24,10 @@ const DarkTheme = {
 
 function HomeStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="Home">
       <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
       <Stack.Screen name="DettagliMateria" component={DettagliMateriaScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 }

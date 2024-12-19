@@ -43,7 +43,6 @@ const AggiungiVoti = ({ navigation }) => {
     }
   };
 
-  //eliminare dati AsyncStorage
   const svuotaStorage = async () => {
     try {
       await AsyncStorage.clear();

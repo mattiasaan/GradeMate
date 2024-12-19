@@ -71,7 +71,6 @@ const HomeScreen = ({ navigation }) => {
 
       <SafeAreaView style={stili.container}>
         <Text style={stili.titolo}>Le tue medie</Text>
-
         {Object.keys(materie).length === 0 ? (
           <Text style={stili.testoNoVoti}>Non hai ancora inserito voti</Text>
         ) : (
