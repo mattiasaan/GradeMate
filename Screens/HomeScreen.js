@@ -136,11 +136,13 @@ const HomeScreen = ({ navigation }) => {
             keyExtractor={(item, index) => index.toString()}
           />
         )}
-        {/*
-          <TouchableOpacity style={stili.bottoneSvuota} onPress={svuotaAsyncStorage}>
-            <Text style={stili.bottoneTesto}>Svuota Dati</Text>
-          </TouchableOpacity>
-        */}
+          {/*
+            <TouchableOpacity style={stili.bottoneSvuota} onPress={svuotaAsyncStorage}>
+              <Text style={stili.bottoneTesto}>Svuota Dati</Text>
+            </TouchableOpacity>
+          */}
+          
+        
       </SafeAreaView>
     </>
   );

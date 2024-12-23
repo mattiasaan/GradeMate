@@ -24,7 +24,7 @@ const DarkTheme = {
 
 function HomeStack() {
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator initialRouteName="Welcome">
       <Stack.Screen
         name="Home"
         component={HomeScreen}
@@ -80,3 +80,13 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+
+/*
+ __  __       _   _   _                       
+ |  \/  | __ _| |_| |_(_) __ _ ___  __ _ _ __  
+ | |\/| |/ _` | __| __| |/ _` / __|/ _` | '_ \ 
+ | |  | | (_| | |_| |_| | (_| \__ \ (_| | | | |
+ |_|  |_|\__,_|\__|\__|_|\__,_|___/\__,_|_| |_|
+
+ */
