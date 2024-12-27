@@ -34,6 +34,13 @@ const WelcomeScreen = ({ navigation }) => {
     checkFirstLaunch();
   }, []);
 
+  // Esegui il reindirizzamento in un useEffect separato
+  useEffect(() => {
+    if (!loading && isFirstLaunch === false) {
+      navigation.replace("Home");
+    }
+  }, [loading, isFirstLaunch, navigation]);
+
   if (loading || isFirstLaunch === null) {
     return (
       <View style={style.container}>
@@ -43,23 +50,25 @@ const WelcomeScreen = ({ navigation }) => {
     );
   }
 
-  if (!isFirstLaunch) {
-    navigation.replace("Home");
-    return null;
+  if (isFirstLaunch) {
+    return (
+      <View style={style.container}>
+        <Text style={style.titolo}>Benvenuto!</Text>
+        <Text style={style.sottotitolo}>
+          Questa applicazione è stata creata tenendo conto del calcolo delle
+          medie con il valore dei voti pratici di un terzo.
+        </Text>
+        <TouchableOpacity
+          style={style.button}
+          onPress={() => navigation.replace("Home")}
+        >
+          <Text style={style.buttonText}>Continua</Text>
+        </TouchableOpacity>
+      </View>
+    );
   }
 
-  return (
-    <View style={style.container}>
-      <Text style={style.titolo}>Benvenuto!</Text>
-      <Text style={style.sottotitolo}>
-        Questa applicazione è stata creata tenendo conto del calcolo delle
-        medie con il valore dei voti pratici di un terzo
-      </Text>
-      <TouchableOpacity style={style.button} onPress={() => navigation.replace("Home")}>
-        <Text style={style.buttonText}>Continua</Text>
-      </TouchableOpacity>
-    </View>
-  );
+  return null; // Mostra nulla nel caso in cui venga gestito il reindirizzamento
 };
 
 const style = StyleSheet.create({
