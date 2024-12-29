@@ -136,11 +136,9 @@ const HomeScreen = ({ navigation }) => {
             keyExtractor={(item, index) => index.toString()}
           />
         )}
-          {/*
             <TouchableOpacity style={stili.bottoneSvuota} onPress={svuotaAsyncStorage}>
               <Text style={stili.bottoneTesto}>Svuota Dati</Text>
             </TouchableOpacity>
-          */}
           
         
       </SafeAreaView>
@@ -199,16 +197,17 @@ const stili = StyleSheet.create({
     textAlign: "center",
     marginBottom: 20,
   },
-  bottoneSvuota: {
-    backgroundColor: "#FF3B30",
-    paddingVertical: 10,
-    marginTop: 20,
-    borderRadius: 8,
-    alignItems: "center",
-  },
+  
   bottoneTesto: {
-    color: "#ffffff",
+    color: "#ff3b30",
     fontSize: 18,
+  },
+  bottoneSvuota: {
+    color: "#76FF03",
+    fontSize: 18,
+    textAlign: "center",
+    marginTop: 20,
+    alignItems: "center",
   },
 });
 

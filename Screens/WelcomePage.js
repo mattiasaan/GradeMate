@@ -34,10 +34,9 @@ const WelcomeScreen = ({ navigation }) => {
     checkFirstLaunch();
   }, []);
 
-  // Esegui il reindirizzamento in un useEffect separato
   useEffect(() => {
     if (!loading && isFirstLaunch === false) {
-      navigation.replace("Home");
+      navigation.replace("HomeScreen");
     }
   }, [loading, isFirstLaunch, navigation]);
 
@@ -58,9 +57,12 @@ const WelcomeScreen = ({ navigation }) => {
           Questa applicazione è stata creata tenendo conto del calcolo delle
           medie con il valore dei voti pratici di un terzo.
         </Text>
+        <Text style={style.sottotitoloAllert}>
+          Se avevi una versione precedente dell' app prima di aggiungere voti svuota la memoria e riapri l'app
+        </Text>
         <TouchableOpacity
           style={style.button}
-          onPress={() => navigation.replace("Home")}
+          onPress={() => navigation.replace("HomeScreen")}
         >
           <Text style={style.buttonText}>Continua</Text>
         </TouchableOpacity>
@@ -68,7 +70,7 @@ const WelcomeScreen = ({ navigation }) => {
     );
   }
 
-  return null; // Mostra nulla nel caso in cui venga gestito il reindirizzamento
+  return null; //Mostra nulla
 };
 
 const style = StyleSheet.create({
@@ -91,6 +93,13 @@ const style = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 20,
     fontSize: 18,
+    textAlign: "center",
+  },
+  sottotitoloAllert: {
+    color: "#ff3b30",
+    fontWeight: "bold",
+    marginBottom: 20,
+    fontSize: 16,
     textAlign: "center",
   },
   button: {

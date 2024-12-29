@@ -39,6 +39,7 @@ const AggiungiVoti = ({ navigation }) => {
     }
 
     const votoParse = parseFloat(voto);
+
     if (isNaN(votoParse) || votoParse < 1 || votoParse > 10) {
       Alert.alert("Errore", "Il voto deve essere un numero tra 1 e 10.");
       return;
@@ -51,7 +52,7 @@ const AggiungiVoti = ({ navigation }) => {
       const votiAggiornati = materie[materia]
         ? { ...materie[materia] }
         : { trimestre: [], pentamestre: [] };
-      votiAggiornati[periodo].push({ voto: votoParse, tipo: tipoVoto });
+      votiAggiornati[periodo].push({ voto: votoParse, tipo: tipoVoto }); //forse problema
 
       const materieAggiornate = { ...materie, [materia]: votiAggiornati };
 

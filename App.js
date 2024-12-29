@@ -26,7 +26,7 @@ function HomeStack() {
   return (
     <Stack.Navigator initialRouteName="Welcome">
       <Stack.Screen
-        name="Home"
+        name="HomeScreen"
         component={HomeScreen}
         options={{ headerShown: false }}
       />
@@ -80,7 +80,6 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
 
 /*
  __  __       _   _   _                       

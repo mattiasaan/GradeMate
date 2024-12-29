@@ -13,7 +13,7 @@ const DettagliMateriaScreen = ({ route }) => {
   const { nomeMateria, updateMaterie } = route.params; // Ora passiamo anche updateMaterie
   const [voti, setVoti] = useState({});
 
-  // Funzione per recuperare i voti dal AsyncStorage
+  //recupera i voti da AsyncStorage
   const fetchVoti = async () => {
     try {
       const materieSalvate = await AsyncStorage.getItem("materie");
@@ -26,7 +26,6 @@ const DettagliMateriaScreen = ({ route }) => {
     }
   };
 
-  // Funzione per salvare i voti in AsyncStorage
   const salvaVoti = async (nuoviVoti) => {
     try {
       const materieSalvate = await AsyncStorage.getItem("materie");
@@ -39,7 +38,6 @@ const DettagliMateriaScreen = ({ route }) => {
     }
   };
 
-  // Funzione per eliminare un voto
   const eliminaVoto = (periodo, index) => {
     Alert.alert("Vuoi eliminare il voto?", "", [
       { text: "Annulla", style: "cancel" },
@@ -51,13 +49,12 @@ const DettagliMateriaScreen = ({ route }) => {
             [periodo]: voti[periodo].filter((_, i) => i !== index),
           };
           setVoti(nuoviVoti);
-          salvaVoti(nuoviVoti); // Salva i nuovi voti in AsyncStorage
+          salvaVoti(nuoviVoti);
         },
       },
     ]);
   };
 
-  // Funzione per mostrare i voti di un periodo
   const mostraVoti = (periodo) => {
     if (!voti[periodo] || voti[periodo].length === 0) {
       return <Text style={style.noVoti}>Nessun voto nel {periodo}</Text>;
@@ -86,7 +83,7 @@ const DettagliMateriaScreen = ({ route }) => {
     );
   };
 
-  // Carica i voti quando la schermata è montata
+
   useEffect(() => {
     fetchVoti();
   }, []);
@@ -95,11 +92,9 @@ const DettagliMateriaScreen = ({ route }) => {
     <View style={style.container}>
       <Text style={style.titolo}>{nomeMateria}</Text>
 
-      {/* Sezione Trimestre */}
       <Text style={style.subTitolo}>Trimestre</Text>
       {mostraVoti("trimestre")}
 
-      {/* Sezione Pentamestre */}
       <Text style={style.subTitolo}>Pentamestre</Text>
       {mostraVoti("pentamestre")}
     </View>
@@ -161,3 +156,4 @@ const style = StyleSheet.create({
 });
 
 export default DettagliMateriaScreen;
+
