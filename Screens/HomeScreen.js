@@ -67,19 +67,47 @@ const HomeScreen = ({ navigation }) => {
   };
 
   const calcolaMediaMateria = (voti) => {
-    let pesoTotale = 0;
-    let sommaPesi = 0;
-
+    let sommaScrittiOrali = 0;
+    let countScrittiOrali = 0;
+    let sommaPratici = 0;
+    let countPratici = 0;
+  
     voti.forEach(({ voto, tipo }) => {
       if (typeof voto === "number" && !isNaN(voto)) {
-        const peso = tipo === "pratico" ? 1 / 3 : 1;
-        sommaPesi += voto * peso;
-        pesoTotale += peso;
+        if (tipo === "pratico") {
+          sommaPratici += voto;
+          countPratici++;
+        } else {
+          sommaScrittiOrali += voto;
+          countScrittiOrali++;
+        }
       }
     });
-
-    return pesoTotale > 0 ? (sommaPesi / pesoTotale).toFixed(2) : "N/A";
+  
+    if (countScrittiOrali === 0 && countPratici === 0) {
+      return "N/A";
+    }
+  
+    if (countScrittiOrali > 0 && countPratici === 0) {
+      return (sommaScrittiOrali / countScrittiOrali).toFixed(2);
+    }
+  
+    if (countPratici > 0 && countScrittiOrali === 0) {
+      return (sommaPratici / countPratici).toFixed(2);
+    }
+  
+    const mediaScrittiOrali =
+      countScrittiOrali > 0 ? sommaScrittiOrali / countScrittiOrali : 0;
+    const mediaPratici =
+      countPratici > 0 ? sommaPratici / countPratici : 0;
+  
+    const mediaPonderata =
+      (mediaScrittiOrali * (2 / 3)) + (mediaPratici * (1 / 3));
+  
+    return mediaPonderata.toFixed(2);
   };
+  
+  
 
   const renderMateria = ({ item }) => {
     const nomeMateria = item[0];

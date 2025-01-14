@@ -52,7 +52,7 @@ const AggiungiVoti = ({ navigation }) => {
       const votiAggiornati = materie[materia]
         ? { ...materie[materia] }
         : { trimestre: [], pentamestre: [] };
-      votiAggiornati[periodo].push({ voto: votoParse, tipo: tipoVoto }); //forse problema
+      votiAggiornati[periodo].push({ voto: votoParse, tipo: tipoVoto });
 
       const materieAggiornate = { ...materie, [materia]: votiAggiornati };
 

@@ -10,7 +10,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const DettagliMateriaScreen = ({ route }) => {
-  const { nomeMateria, updateMaterie } = route.params; // Ora passiamo anche updateMaterie
+  const { nomeMateria, updateMaterie } = route.params;
   const [voti, setVoti] = useState({});
 
   //recupera i voti da AsyncStorage
