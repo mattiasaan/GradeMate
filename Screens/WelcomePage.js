@@ -58,7 +58,7 @@ const WelcomeScreen = ({ navigation }) => {
           medie con il valore dei voti pratici di un terzo.
         </Text>
         <Text style={style.sottotitoloAllert}>
-          Se avevi una versione precedente dell' app prima di aggiungere voti svuota la memoria e riapri l'app
+          Se avevi una versione precedente dell' app e l'aggiunta dei voti non dovesse funzionare svuota i dati e riapri l'app
         </Text>
         <TouchableOpacity
           style={style.button}
@@ -70,7 +70,7 @@ const WelcomeScreen = ({ navigation }) => {
     );
   }
 
-  return null; //Mostra nulla
+  return null;
 };
 
 const style = StyleSheet.create({

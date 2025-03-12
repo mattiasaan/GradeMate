@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -71,7 +71,7 @@ const HomeScreen = ({ navigation }) => {
     let countScrittiOrali = 0;
     let sommaPratici = 0;
     let countPratici = 0;
-  
+
     voti.forEach(({ voto, tipo }) => {
       if (typeof voto === "number" && !isNaN(voto)) {
         if (tipo === "pratico") {
@@ -89,11 +89,11 @@ const HomeScreen = ({ navigation }) => {
     }
   
     if (countScrittiOrali > 0 && countPratici === 0) {
-      return (sommaScrittiOrali / countScrittiOrali).toFixed(2);
+      return (sommaScrittiOrali / countScrittiOrali);
     }
   
     if (countPratici > 0 && countScrittiOrali === 0) {
-      return (sommaPratici / countPratici).toFixed(2);
+      return (sommaPratici / countPratici);
     }
   
     const mediaScrittiOrali =
@@ -104,10 +104,11 @@ const HomeScreen = ({ navigation }) => {
     const mediaPonderata =
       (mediaScrittiOrali * (2 / 3)) + (mediaPratici * (1 / 3));
   
-    return mediaPonderata.toFixed(2);
+    return mediaPonderata;
   };
   
   
+  const [mediaTotale, setMediaTotale] = useState(0);
 
   const renderMateria = ({ item }) => {
     const nomeMateria = item[0];
@@ -115,6 +116,8 @@ const HomeScreen = ({ navigation }) => {
 
     const ultimiVoti = voti.slice(-3);
     const media = calcolaMediaMateria(voti);
+
+    const mediaDisplay = isNaN(media) ? "N/A" : media.toFixed(2);
 
     return (
       <TouchableOpacity
@@ -133,10 +136,19 @@ const HomeScreen = ({ navigation }) => {
                   .join("   ")}
           </Text>
         </View>
-        <Text style={stili.media}>{media}</Text>
+        <Text style={stili.media}>{mediaDisplay}</Text>
       </TouchableOpacity>
     );
   };
+
+  useEffect(() => {
+    const totale = Object.entries(materie).reduce((acc, [, voti]) => {
+      return acc + calcolaMediaMateria(voti);
+    }, 0);
+  
+    const mediaTot = totale / Object.entries(materie).length;
+    setMediaTotale(mediaTot);
+  }, [materie]);
 
   return (
     <>
@@ -154,6 +166,8 @@ const HomeScreen = ({ navigation }) => {
             Visualizza {periodo === "trimestre" ? "Pentamestre" : "Trimestre"}
           </Text>
         </TouchableOpacity>
+
+        <Text style={stili.mediaTot}>La media totale è {mediaTotale.toFixed(2)}</Text>
 
         {Object.keys(materie).length === 0 ? (
           <Text style={stili.testoNoVoti}>Non hai ancora inserito voti</Text>
@@ -213,6 +227,13 @@ const stili = StyleSheet.create({
     textAlign: "center",
     flex: 1,
   },
+
+  mediaTot:{
+    color: "#EAEAEA",
+    fontSize: 20,
+    textAlign: "center",
+  },
+
   testoNoVoti: {
     color: "#888",
     fontSize: 18,
@@ -228,13 +249,14 @@ const stili = StyleSheet.create({
   
   bottoneTesto: {
     color: "#ff3b30",
-    fontSize: 18,
+    fontSize: 16,
   },
+
   bottoneSvuota: {
     color: "#76FF03",
-    fontSize: 18,
     textAlign: "center",
-    marginTop: 20,
+    marginTop: 10,
+    marginBottom:-10,
     alignItems: "center",
   },
 });
