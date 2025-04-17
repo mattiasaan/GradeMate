@@ -22,6 +22,7 @@ const listaMaterie = [
   "inglese",
   "matematica",
   "scienze motorie",
+  "educazione civica",
 ];
 const tipiVoto = ["scritto", "orale", "pratico"];
 const periodi = ["trimestre", "pentamestre"];

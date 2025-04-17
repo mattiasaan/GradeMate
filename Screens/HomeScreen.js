@@ -142,11 +142,18 @@ const HomeScreen = ({ navigation }) => {
   };
 
   useEffect(() => {
-    const totale = Object.entries(materie).reduce((acc, [, voti]) => {
-      return acc + calcolaMediaMateria(voti);
-    }, 0);
+    const medieValide = Object.entries(materie)
+      .map(([, voti]) => calcolaMediaMateria(voti))
+      .filter((media) => typeof media === "number" && !isNaN(media));
   
-    const mediaTot = totale / Object.entries(materie).length;
+    if (medieValide.length === 0) {
+      setMediaTotale(0);
+      return;
+    }
+  
+    const totale = medieValide.reduce((acc, media) => acc + media, 0);
+    const mediaTot = totale / medieValide.length;
+  
     setMediaTotale(mediaTot);
   }, [materie]);
 
